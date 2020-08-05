@@ -7,9 +7,7 @@
     cisco.ios.ios_ntp:
       server: "{{ server }}"
       state: present
-    loop:
-      - 0.de.pool.ntp.org
-      - 1.de.pool.ntp.org
+    loop: "{{ system.ntp.servers }}"
     loop_control:
       loop_var: server
       label: "{{ server }}"
