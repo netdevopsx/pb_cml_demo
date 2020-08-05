@@ -5,6 +5,9 @@
   tasks:
   - name: "Set NTP Server"
     cisco.ios.ios_ntp:
-      server: "{{ item }}"
+      server: "{{ server }}"
       state: present
     loop: "{{ system.ntp.servers }}"
+    loop_control:
+      loop_var: server
+      label: "{{ server }}"
