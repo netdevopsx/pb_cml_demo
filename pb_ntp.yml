@@ -2,6 +2,13 @@
 - name: Setup NTP Service                                                                                                                                                       
   hosts: all                                                                                                                                                                        
   tasks:
-    - name: debug
-      debug:
-        msg: "Test"
+  - name: "Set NTP Server {{ server }}"
+    cisco.ios.ios_ntp:
+      server: "{{ server }}"
+      state: present
+    loop:
+      - 0.de.pool.ntp.org
+      - 1.de.pool.ntp.org
+    loop_control:
+      loop_var: server
+      label: "{{ server }}"
