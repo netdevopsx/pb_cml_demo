@@ -3,11 +3,8 @@
   hosts: all 
   gather_facts: no                                                                                                                                                                       
   tasks:
-  - name: "Set NTP Server {{ server }}"
+  - name: "Set NTP Server"
     cisco.ios.ios_ntp:
-      server: "{{ server }}"
+      server: "{{ item }}"
       state: present
     loop: "{{ system.ntp.servers }}"
-    loop_control:
-      loop_var: server
-      label: "{{ server }}"
